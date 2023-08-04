@@ -17,6 +17,7 @@ using Repository.Repositories;
 using Repository.Repositories.Interfaces;
 using RepositoryLayer;
 using ServiceLayer;
+using ServiceLayer.Mapping;
 
 namespace Api
 {
@@ -39,7 +40,7 @@ namespace Api
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultCOnnection"));
             });
 
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(MappingProfile));
             services.AddRepositoryLayer();
             services.AddServiceLayer();
             //services.AddScoped(nameof(IRepository<>), typeof(Repository<>));

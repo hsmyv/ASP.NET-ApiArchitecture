@@ -9,12 +9,20 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CustomerController : Controller
+    public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _service;
         public CustomerController(ICustomerService service)
         {
             _service = service;
+        }
+
+        [HttpGet]
+        [Route("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _service.GetAllAsync();
+            return Ok(result);
         }
     }
 }

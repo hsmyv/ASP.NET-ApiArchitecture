@@ -9,6 +9,6 @@ namespace ServiceLayer.Services.Interfaces
 {
     public interface ICustomerService
     {
-        Task<List<CustomerListDto>> GetAll();
+        Task<List<CustomerListDto>> GetAllAsync();
     }
 }
