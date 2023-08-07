@@ -18,6 +18,7 @@ namespace Domain.Configurations
             builder.Property(m => m.Address).IsRequired(false).HasMaxLength(300);
             builder.Property(m => m.CreatedDate).HasDefaultValue(DateTime.Now);
             builder.Property(m => m.SoftDelete).HasDefaultValue(false);
+            builder.HasQueryFilter(m => !m.SoftDelete);
 
         }
     }

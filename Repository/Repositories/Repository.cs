@@ -22,7 +22,7 @@ namespace Repository.Repositories
         }
         public async Task CreateAsync(T entity)
         {
-            if (entity is null) throw new ArgumentNullException();
+            if (entity is null) throw new ArgumentNullException(nameof(entity));
 
             await entities.AddAsync(entity);
             await _context.SaveChangesAsync();
@@ -30,7 +30,7 @@ namespace Repository.Repositories
 
         public async Task DeleteAsync(T entity)
         {
-            if (entity is null) throw new ArgumentNullException();
+            if (entity is null) throw new ArgumentNullException(nameof(entity));
 
             entities.Remove(entity);
             await _context.SaveChangesAsync();
@@ -39,7 +39,7 @@ namespace Repository.Repositories
         public async Task<T> GetAsync(int id)
         {
             T entity = await entities.FirstOrDefaultAsync(m => m.Id == id);
-            if (entity is null) throw new NullReferenceException();
+            if (entity is null) throw new NullReferenceException(nameof(entity));
 
             return entity;
         }
@@ -57,7 +57,7 @@ namespace Repository.Repositories
         public async Task SoftDeleteAsync(T entity)
         {
             T entityDb = await entities.FirstOrDefaultAsync(m => m.Id == entity.Id);
-            if (entity is null) throw new NullReferenceException();
+            if (entity is null) throw new NullReferenceException(nameof(entityDb));
 
             entityDb.SoftDelete = true;
             await _context.SaveChangesAsync();
@@ -65,7 +65,7 @@ namespace Repository.Repositories
 
         public async Task UpdateAsync(T entity)
         {
-            if (entity is null) throw new ArgumentNullException();
+            if (entity is null) throw new ArgumentNullException(nameof(entity));
 
             entities.Update(entity);
             await _context.SaveChangesAsync();

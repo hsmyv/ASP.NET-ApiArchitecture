@@ -14,6 +14,8 @@ namespace ServiceLayer.Mapping
         public MappingProfile()
         {
             CreateMap<Customer, CustomerListDto>();
+            CreateMap<Customer, CustomerCreateDto>().ReverseMap();
+            CreateMap<Customer, CustomerEditDto>().ReverseMap().ForAllMembers(m => m.Condition((dest, src, obj) => obj != null));
         }
     }
 }

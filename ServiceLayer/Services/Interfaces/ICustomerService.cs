@@ -10,5 +10,9 @@ namespace ServiceLayer.Services.Interfaces
     public interface ICustomerService
     {
         Task<List<CustomerListDto>> GetAllAsync();
+        Task InsertAsync(CustomerCreateDto customer);
+        Task UpdateAsync(int id, CustomerEditDto customer);
+        Task<List<CustomerListDto>> GetAllByNameAsync();
+
     }
 }
