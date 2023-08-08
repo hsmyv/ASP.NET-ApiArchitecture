@@ -46,9 +46,10 @@ namespace Repository.Repositories
 
         public async Task<T> FindAsync(Expression<Func<T, bool>> predicate)
         {
-            return await entities.FindAsync(predicate);
+            return await entities.FirstOrDefaultAsync(predicate);
         }
 
+  
         public async Task<List<T>> GetAllAsync()
         {
             return await entities.ToListAsync();
@@ -69,6 +70,12 @@ namespace Repository.Repositories
 
             entities.Update(entity);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> predicate)
+        {
+            IEnumerable<T> datas = await entities.Where(predicate).ToListAsync();
+            return datas; 
         }
     }
 }

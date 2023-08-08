@@ -12,7 +12,8 @@ namespace ServiceLayer.Services.Interfaces
         Task<List<CustomerListDto>> GetAllAsync();
         Task InsertAsync(CustomerCreateDto customer);
         Task UpdateAsync(int id, CustomerEditDto customer);
-        Task<List<CustomerListDto>> GetAllByNameAsync();
+        Task<CustomerListDto> GetByNameAsync(string name);
+        Task<IEnumerable<CustomerListDto>> GetAllByConditionAsync(string search);
 
     }
 }

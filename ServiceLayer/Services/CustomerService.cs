@@ -41,9 +41,16 @@ namespace ServiceLayer.Services
             await _repository.UpdateAsync(entity);
         }
 
-        public async Task<List<CustomerListDto>> GetByNameAsync()
+        public async Task<CustomerListDto> GetByNameAsync(string search)
         {
-            return _mapper.Map<List<CustomerListDto>>(await _repository.GetAllAsync());
+            var model = await _repository.FindAsync(m => m.FullName == search);
+
+            return _mapper.Map<CustomerListDto>(model);
+        }
+        public async Task<IEnumerable<CustomerListDto>> GetAllByConditionAsync(string search)
+        {
+           
+            return _mapper.Map<IEnumerable<CustomerListDto>>(await _repository.FindAllAsync(m => m.FullName.Contains(search)));
         }
 
     }
